@@ -28,5 +28,6 @@ virtual_alias_maps = hash:/etc/postfix/virtual
 
 soft_bounce = yes
 smtpd_helo_required = yes
+notify_classes = resource
 smtpd_helo_restrictions = reject_invalid_helo_hostname
 smtpd_sender_restrictions = check_sender_access hash:/etc/postfix/virtual, reject_non_fqdn_sender, reject_unknown_sender_domain, warn_if_reject
