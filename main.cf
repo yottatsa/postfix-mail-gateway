@@ -40,5 +40,5 @@ soft_bounce = yes
 smtpd_helo_required = yes
 notify_classes = resource
 smtpd_client_restrictions = permit_tls_all_clientcerts, reject_unknown_client_hostname
-smtpd_helo_restrictions = reject_invalid_helo_hostname
+smtpd_helo_restrictions = permit_tls_all_clientcerts, reject_unknown_helo_hostname
 smtpd_sender_restrictions = check_sender_access hash:/etc/postfix/virtual, reject_non_fqdn_sender, reject_unknown_sender_domain
