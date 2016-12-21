@@ -1,5 +1,13 @@
-postfix-mail-gateway
+Postfix Mail Gateway
 ====================
+
+ * simple config
+ * spam-filtering based on sanity checks and DNSBLs
+ * tls-enabled receiver
+ * tls-enforced forwarding
+ * works with letsencrypt
+ * optional S/MIME mail encryption
+ * logging to syslog
 
 To run:
 
@@ -10,7 +18,8 @@ Only one config is needed: `/etc/postfix/virtual`:
     domain.tld domain.tld
     me@domain.tld back@another.tld,me
 
+Optionally, put `/etc/postifx/smime.crt` for encryption.
+
 See also:
- * https://github.com/yottatsa/carclassify
  * https://hub.docker.com/r/yottatsa/postfix-mail-gateway/
  * https://hub.docker.com/r/yottatsa/certbot/
