@@ -4,4 +4,4 @@ RUN echo "postmaster: root" > /etc/postfix/aliases
 ADD encrypt.sh /
 ADD main.cf /etc/postfix
 ADD master.cf /etc/postfix
-CMD newaliases; postmap /etc/postfix/virtual; /usr/lib/postfix/master -d
+CMD newaliases; postmap /etc/postfix/virtual; exec /usr/lib/postfix/master -d
