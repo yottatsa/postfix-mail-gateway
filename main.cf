@@ -32,6 +32,8 @@ alias_database = hash:/etc/postfix/aliases
 myorigin = $myhostname
 inet_interfaces = all
 inet_protocols = all
+virtual_mailbox_limit = 512000000
+message_size_limit = 102400000
 
 virtual_mailbox_domains = hash:/etc/postfix/virtual
 virtual_mailbox_maps = hash:/etc/postfix/virtual
