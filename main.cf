@@ -20,10 +20,10 @@ smtp_tls_cert_file=/etc/postfix/ssl/fullchain.pem
 smtp_tls_key_file=/etc/postfix/ssl/privkey.pem
 smtp_tls_CApath=/etc/ssl/certs
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-smtp_tls_security_level=secure 
+smtp_tls_security_level=may
+#smtp_tls_policy_maps = hash:/etc/postfix/tls_policy
 smtp_tls_loglevel=1                                      
 smtp_tls_verify_cert_match=hostname, nexthop, dot-nexthop
-
 smtp_dns_support_level=enabled
 
 smtpd_relay_restrictions = permit_mynetworks defer_unauth_destination
@@ -32,7 +32,9 @@ alias_database = hash:/etc/postfix/aliases
 myorigin = $myhostname
 inet_interfaces = all
 inet_protocols = all
+
 virtual_mailbox_limit = 512000000
+mailbox_size_limit = 512000000
 message_size_limit = 102400000
 
 virtual_mailbox_domains = hash:/etc/postfix/virtual
