@@ -26,7 +26,6 @@ smtp_tls_loglevel=1
 smtp_tls_verify_cert_match=hostname, nexthop, dot-nexthop
 smtp_dns_support_level=enabled
 
-smtpd_relay_restrictions = permit_mynetworks defer_unauth_destination
 alias_maps = hash:/etc/postfix/aliases
 alias_database = hash:/etc/postfix/aliases
 myorigin = $myhostname
@@ -47,6 +46,15 @@ virtual_gid_maps = static:1000
 soft_bounce = yes
 smtpd_helo_required = yes
 notify_classes = resource
-smtpd_client_restrictions = permit_tls_all_clientcerts, reject_unknown_client_hostname, reject_rbl_client zen.spamhaus.org
-smtpd_helo_restrictions = permit_tls_all_clientcerts, reject_unknown_helo_hostname
-smtpd_sender_restrictions = check_sender_access hash:/etc/postfix/virtual, reject_non_fqdn_sender, permit_tls_all_clientcerts, reject_unknown_sender_domain
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, defer_unauth_destination
+smtpd_client_restrictions = permit_mynetworks, permit_sasl_authenticated, permit_tls_all_clientcerts, reject_unknown_client_hostname, reject_rbl_client zen.spamhaus.org
+smtpd_helo_restrictions = permit_mynetworks, permit_sasl_authenticated, permit_tls_all_clientcerts, reject_unknown_helo_hostname
+smtpd_sender_restrictions = smtpd_reject_unlisted_sender, permit_mynetworks, permit_sasl_authenticated, check_sender_access hash:/etc/postfix/virtual, check_sender_access pcre:/etc/postfix/sender, reject_non_fqdn_sender, permit_tls_all_clientcerts, reject_unknown_sender_domain
+
+smtpd_sasl_auth_enable = yes
+broken_sasl_auth_clients = yes
+smtpd_sasl_security_options = noanonymous,noplaintext
+smtpd_sasl_tls_security_options = $smtpd_sasl_security_options
+smtpd_tls_auth_only = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
