@@ -37,19 +37,17 @@ mailbox_size_limit = 512000000
 message_size_limit = 102400000
 
 virtual_mailbox_domains = hash:/etc/postfix/virtual
-virtual_mailbox_maps = hash:/etc/postfix/virtual
-virtual_mailbox_base = /home
-
-virtual_uid_maps = static:1000
-virtual_gid_maps = static:1000
+virtual_alias_maps = hash:/etc/postfix/virtual
+virtual_transport = lmtp:unix:private/dovecot-lmtp
+mailbox_transport = lmtp:unix:private/dovecot-lmtp
 
 soft_bounce = yes
 smtpd_helo_required = yes
 notify_classes = resource
-smtpd_relay_restrictions = permit_mynetworks, defer_unauth_destination
-smtpd_client_restrictions = permit_mynetworks, permit_tls_all_clientcerts, reject_unknown_client_hostname, reject_rbl_client zen.spamhaus.org
-smtpd_helo_restrictions = permit_mynetworks, permit_tls_all_clientcerts, reject_unknown_helo_hostname
-smtpd_sender_restrictions = permit_mynetworks, check_sender_access hash:/etc/postfix/virtual, reject_non_fqdn_sender, permit_tls_all_clientcerts, reject_unknown_sender_domain
+smtpd_relay_restrictions = permit_mynetworks defer_unauth_destination
+smtpd_client_restrictions = permit_mynetworks permit_tls_all_clientcerts reject_unknown_client_hostname reject_rbl_client zen.spamhaus.org
+smtpd_helo_restrictions = permit_mynetworks permit_tls_all_clientcerts reject_unknown_helo_hostname
+smtpd_sender_restrictions = permit_mynetworks check_sender_access hash:/etc/postfix/virtual reject_non_fqdn_sender permit_tls_all_clientcerts reject_unknown_sender_domain
 
 smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
