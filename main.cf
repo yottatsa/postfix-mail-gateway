@@ -22,7 +22,7 @@ smtp_tls_CApath=/etc/ssl/certs
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 smtp_tls_security_level=may
 #smtp_tls_policy_maps = hash:/etc/postfix/tls_policy
-smtp_tls_loglevel=1                                      
+smtp_tls_loglevel=1
 smtp_tls_verify_cert_match=hostname, nexthop, dot-nexthop
 smtp_dns_support_level=enabled
 
@@ -49,7 +49,7 @@ smtpd_client_restrictions = permit_tls_all_clientcerts reject_unknown_client_hos
 smtpd_helo_restrictions = permit_mynetworks permit_tls_all_clientcerts reject_unknown_helo_hostname
 smtpd_sender_restrictions = permit_mynetworks check_sender_access hash:/etc/postfix/virtual reject_non_fqdn_sender permit_tls_all_clientcerts reject_unknown_sender_domain
 
-smtpd_sasl_auth_enable = yes
+smtpd_sasl_auth_enable = no
 broken_sasl_auth_clients = yes
 smtpd_sasl_security_options = noanonymous,noplaintext
 smtpd_sasl_tls_security_options = $smtpd_sasl_security_options
